@@ -42,7 +42,9 @@ export const FOTA = () => {
 						<ReloadIcon />
 					</button>
 				</h4>
-				<Jobs />
+				<div className="job-container">
+					<Jobs />
+				</div>
 			</div>
 		</>
 	)

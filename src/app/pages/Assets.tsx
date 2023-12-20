@@ -12,7 +12,7 @@ export const Assets = () => {
 	return (
 		<Main>
 			<div
-				className="card"
+				className="card mt-4"
 				data-intro="This card lists the assets in your project. Click on one to see its details."
 			>
 				<div className="card-header d-flex align-items-center justify-content-between">

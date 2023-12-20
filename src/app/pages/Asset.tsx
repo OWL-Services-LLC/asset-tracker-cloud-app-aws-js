@@ -6,6 +6,7 @@ import { InfoHeader } from 'components/Asset/InfoHeader'
 import { Personalization } from 'components/Asset/Personalization'
 import { Collapsable } from 'components/Collapsable'
 import {
+	ActivityIcon,
 	BatteryIcon,
 	ButtonIcon,
 	CellularIcon,
@@ -24,6 +25,7 @@ import { ButtonPresses } from 'components/HistoricalData/ButtonPresses'
 import { ImpactsChart } from 'components/HistoricalData/ImpactsChart'
 import { RSRPChart } from 'components/HistoricalData/RSRPChart'
 import { TemperatureChart } from 'components/HistoricalData/TemperatureChart'
+import { AccelerationChart } from 'components/HistoricalData/AccelerationChart'
 import { Loading } from 'components/Loading'
 import { Main } from 'components/Main'
 import { MapWithSettings } from 'components/Map/MapWithSettings'
@@ -64,7 +66,7 @@ export const Asset = () => {
 
 	return (
 		<Main>
-			<div className="card">
+			<div className="card mt-4 mb-4">
 				{asset === undefined && (
 					<div className="card-header d-flex align-items-center justify-content-between">
 						<span className="me-4">{id}</span>
@@ -73,7 +75,9 @@ export const Asset = () => {
 				{asset !== undefined && twin !== undefined && (
 					<div className="card-header pt-0 pe-0 pb-0 ps-0">
 						<div data-intro="This map shows the location of your asset.">
-							<MapWithSettings asset={asset} />
+							<div className="map-container">
+								<MapWithSettings asset={asset} />
+							</div>
 						</div>
 						<hr className="mt-0 mb-0" />
 						<div
@@ -94,135 +98,148 @@ export const Asset = () => {
 					)}
 					{asset !== undefined && (
 						<>
-							<Collapsable
-								title={
-									<IconWithText>
-										<InfoIcon size={22} />
-										Asset Information
-									</IconWithText>
-								}
-								id="asset:information"
-								data-intro="This shows hard- and software, and connection information about the asset. Click to reveal the information."
-							>
-								<AssetInformation twin={twin} />
-							</Collapsable>
-							<Collapsable
-								title={
-									<IconWithText>
-										<ConfigurationIcon size={22} />
-										Configuration
-									</IconWithText>
-								}
-								id="asset:configuration"
-								data-intro="This allows to change the run-time configuration of the asset."
-							>
-								<h4>Personalization</h4>
-								<Personalization
-									asset={asset}
-									key={`asset-${asset.id}-${asset.version}`}
-								/>
-								<div data-intro="This allows you change the run-time configuration of the asset.">
-									<h4 className="mt-4 ">Asset configuration</h4>
-									<HelpNote />
-									<Configuration
-										key={`asset-${asset.id}-${twin?.version ?? 0}`}
+							<div className="row">
+								<Collapsable
+									title={
+										<IconWithText>
+											<InfoIcon size={22} />
+											Asset Information
+										</IconWithText>
+									}
+									id="asset:information"
+									data-intro="This shows hard- and software, and connection information about the asset. Click to reveal the information."
+								>
+									<AssetInformation twin={twin} />
+								</Collapsable>
+								<Collapsable
+									title={
+										<IconWithText>
+											<ConfigurationIcon size={22} />
+											Configuration
+										</IconWithText>
+									}
+									id="asset:configuration"
+									data-intro="This allows to change the run-time configuration of the asset."
+								>
+									<h4>Personalization</h4>
+									<Personalization
+										asset={asset}
+										key={`asset-${asset.id}-${asset.version}`}
 									/>
-								</div>
-							</Collapsable>
-							<Collapsable
-								id="asset:fota"
-								title={
-									<IconWithText>
-										<FOTAIcon size={22} /> Firmware Upgrade (
-										<abbr title="Firmware Upgrade over the air">FOTA</abbr>)
-									</IconWithText>
-								}
-								data-intro="This allows to schedule firmware upgrades of the air for the asset."
-							>
-								<FOTA />
-							</Collapsable>
-							<Collapsable
-								id="asset:neighboringcells"
-								title={
-									<IconWithText>
-										<NetworkSurveysIcon size={22} /> Neighboring cells
-									</IconWithText>
-								}
-								data-intro="This shows the most recent neighboring cells the asset able to identify."
-							>
-								<NeighborCellMeasurementsReport twin={twin} />
-							</Collapsable>
-							<Collapsable
-								id="asset:rsrp"
-								title={
-									<IconWithText>
-										<CellularIcon size={22} /> RSRP
-									</IconWithText>
-								}
-								data-intro="This shows a history chart of the signal quality."
-							>
-								<RSRPChart />
-							</Collapsable>
-							<Collapsable
-								id="asset:battery"
-								title={
-									<IconWithText>
-										<BatteryIcon size={22} /> Battery
-									</IconWithText>
-								}
-								data-intro="This shows a history chart of the asset's battery voltage."
-							>
-								<BatteryChart />
-							</Collapsable>
-							<Collapsable
-								id="asset:temperature"
-								title={
-									<IconWithText>
-										<ThermometerIcon size={22} /> Temperature
-									</IconWithText>
-								}
-								data-intro="This shows a history chart of the temperature measured by the asset's environment sensor."
-							>
-								<TemperatureChart />
-							</Collapsable>
-							<Collapsable
-								id="asset:impacts"
-								title={
-									<IconWithText>
-										<ImpactsIcon size={22} /> Impacts
-									</IconWithText>
-								}
-								data-intro="This shows a history chart of the impacts the asset has reported."
-							>
-								<ImpactsChart />
-							</Collapsable>
-							<Collapsable
-								id="asset:button"
-								title={
-									<IconWithText>
-										<ButtonIcon size={22} /> Button
-									</IconWithText>
-								}
-								data-intro="This shows the button presses registered by the asset."
-							>
-								<ButtonPresses />
-							</Collapsable>
-							<Collapsable
-								id="asset:danger"
-								title={
-									<IconWithText>
-										<DangerIcon size={22} /> Danger zone
-									</IconWithText>
-								}
-								data-intro="This allows to delete the asset."
-							>
-								<DeleteAsset
-									onDeleted={() => {
-										setDeleted(true)
-										reload()
-									}}
-								/>
-							</Collapsable>
+									<div data-intro="This allows you change the run-time configuration of the asset.">
+										<h4 className="mt-4 ">Asset configuration</h4>
+										<HelpNote />
+										<Configuration
+											key={`asset-${asset.id}-${twin?.version ?? 0}`}
+										/>
+									</div>
+								</Collapsable>
+								<Collapsable
+									id="asset:fota"
+									title={
+										<IconWithText>
+											<FOTAIcon size={22} /> Firmware Upgrade (
+											<abbr title="Firmware Upgrade over the air">FOTA</abbr>)
+										</IconWithText>
+									}
+									data-intro="This allows to schedule firmware upgrades of the air for the asset."
+								>
+									<FOTA />
+								</Collapsable>
+								<Collapsable
+									id="asset:neighboringcells"
+									title={
+										<IconWithText>
+											<NetworkSurveysIcon size={22} /> Neighboring cells
+										</IconWithText>
+									}
+									data-intro="This shows the most recent neighboring cells the asset able to identify."
+								>
+									<NeighborCellMeasurementsReport twin={twin} />
+								</Collapsable>
+								<Collapsable
+									id="asset:rsrp"
+									title={
+										<IconWithText>
+											<CellularIcon size={22} /> RSRP
+										</IconWithText>
+									}
+									data-intro="This shows a history chart of the signal quality."
+								>
+									<RSRPChart />
+								</Collapsable>
+								<Collapsable
+									id="asset:battery"
+									title={
+										<IconWithText>
+											<BatteryIcon size={22} /> Battery
+										</IconWithText>
+									}
+									data-intro="This shows a history chart of the asset's battery voltage."
+								>
+									<BatteryChart />
+								</Collapsable>
+								<Collapsable
+									id="asset:temperature"
+									title={
+										<IconWithText>
+											<ThermometerIcon size={22} /> Temperature
+										</IconWithText>
+									}
+									data-intro="This shows a history chart of the temperature measured by the asset's environment sensor."
+								>
+									<TemperatureChart />
+								</Collapsable>
+								<Collapsable
+									id="asset:accelerations"
+									title={
+										<IconWithText>
+											<ActivityIcon size={22} /> Acceleration
+										</IconWithText>
+									}
+									data-intro="This shows a history chart of the accelerations measured by the asset's environment sensor."
+								>
+									<AccelerationChart />
+								</Collapsable>
+								<Collapsable
+									id="asset:impacts"
+									title={
+										<IconWithText>
+											<ImpactsIcon size={22} /> Impacts
+										</IconWithText>
+									}
+									data-intro="This shows a history chart of the impacts the asset has reported."
+								>
+									<ImpactsChart />
+								</Collapsable>
+								<Collapsable
+									id="asset:button"
+									title={
+										<IconWithText>
+											<ButtonIcon size={22} /> Button
+										</IconWithText>
+									}
+									data-intro="This shows the button presses registered by the asset."
+								>
+									<ButtonPresses />
+								</Collapsable>
+								<Collapsable
+									id="asset:danger"
+									title={
+										<IconWithText>
+											<DangerIcon size={22} /> Danger zone
+										</IconWithText>
+									}
+									data-intro="This allows to delete the asset."
+								>
+									<DeleteAsset
+										onDeleted={() => {
+											setDeleted(true)
+											reload()
+										}}
+									/>
+								</Collapsable>
+							</div>
 						</>
 					)}
 				</div>

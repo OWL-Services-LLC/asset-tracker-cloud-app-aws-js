@@ -10,6 +10,7 @@ import { expectedSendIntervalInSeconds } from 'asset/expectedSendIntervalInSecon
 import { ConnectionInformation } from 'components/Asset/ConnectionInformation'
 import styles from 'components/Asset/InfoHeader.module.css'
 import {
+	ActivityIcon,
 	AltitudeIcon,
 	BatteryIcon,
 	CloudIcon,
@@ -150,6 +151,12 @@ const EnvInfo = ({
 						<IconWithText data-intro="The most recent barometric pressure measured using the environment sensor of the asset.">
 							<CloudIcon />
 							{Math.round(env.v.atmp * 10)} hPa
+						</IconWithText>
+					)}
+					{env.v.z && (
+						<IconWithText data-intro="The most recent acceleration measured using the environment sensor of the asset.">
+							<ActivityIcon />
+							{Math.round(env.v.z)} m2/s
 						</IconWithText>
 					)}
 				</span>

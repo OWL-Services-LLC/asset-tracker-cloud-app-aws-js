@@ -8,3 +8,4 @@ build/
 test-session/
 test-results/
 .swc/
+.envrc

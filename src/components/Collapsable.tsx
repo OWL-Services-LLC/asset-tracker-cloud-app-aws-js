@@ -30,7 +30,11 @@ export const Collapsable = ({
 
 	if (collapsed)
 		return (
-			<section className={styles.collapsable} id={id} {...restProps}>
+			<section
+				className={`card col-lg-6 ${styles.collapsable}`}
+				id={id}
+				{...restProps}
+			>
 				<header
 					onClick={handleClick}
 					role={'button'}
@@ -46,7 +50,11 @@ export const Collapsable = ({
 		)
 
 	return (
-		<section className={styles.collapsable} id={id} {...restProps}>
+		<section
+			className={`card col-lg-6 ${styles.collapsable}`}
+			id={id}
+			{...restProps}
+		>
 			<header
 				onClick={handleClick}
 				role={'button'}

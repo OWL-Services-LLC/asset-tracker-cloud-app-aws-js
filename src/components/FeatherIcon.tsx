@@ -372,6 +372,11 @@ export const OutdatedConfigValueIcon = (options?: TypedIconOptions) => (
 export const ThermometerIcon = (options?: TypedIconOptions) => (
 	<FeatherIcon {...options} title="Thermometer" type="thermometer" />
 )
+
+export const ActivityIcon = (options?: TypedIconOptions) => (
+	<FeatherIcon {...options} title="Activity" type="activity" />
+)
+
 export const SunIcon = (options?: TypedIconOptions) => (
 	<FeatherIcon {...options} title="Sun" type="sun" />
 )

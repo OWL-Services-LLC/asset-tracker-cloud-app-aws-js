@@ -65,3 +65,40 @@ a {
 dt {
   font-weight: 600;
 }
+
+.card {
+  padding: 12px;
+}
+
+.table-container {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.table-body {
+  display: block;
+  max-height: inherit;
+  overflow: auto;
+}
+
+.job-container {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.form-container{
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.map-container {
+  border-radius: 50px;
+}
+
+.main-container {
+  width: 80%;
+}
+
+.btn {
+  font-size: 90%;
+}

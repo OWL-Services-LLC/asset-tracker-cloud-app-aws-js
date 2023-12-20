@@ -16,6 +16,7 @@ export const state: Required<AWSReportedData> = {
 			temp: 23.6,
 			hum: 50.5,
 			atmp: 100.36,
+			z: -8.718111,
 		},
 		ts: now,
 	},

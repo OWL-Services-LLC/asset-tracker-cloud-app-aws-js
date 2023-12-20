@@ -17,27 +17,29 @@ export const ButtonPresses = () => {
 	return (
 		<>
 			<ChartDateRange hideBinControls className="mb-4" />
-			<table className="table button-presses">
-				<thead>
-					<tr>
-						<th>Button</th>
-						<th>Time</th>
-					</tr>
-				</thead>
-				<tbody>
-					{history.map(({ value, date }, k) => (
-						<tr key={k}>
-							<td>{value}</td>
-							<td>
-								{date.toLocaleString()}{' '}
-								<small>
-									(<RelativeTime ts={date} />)
-								</small>
-							</td>
+			<div className="table-container">
+				<table className="table button-presses">
+					<thead>
+						<tr>
+							<th>Button</th>
+							<th>Time</th>
 						</tr>
-					))}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						{history.map(({ value, date }, k) => (
+							<tr key={k}>
+								<td>{value}</td>
+								<td>
+									{date.toLocaleString()}{' '}
+									<small>
+										(<RelativeTime ts={date} />)
+									</small>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
 		</>
 	)
 }

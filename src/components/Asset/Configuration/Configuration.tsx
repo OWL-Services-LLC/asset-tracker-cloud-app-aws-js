@@ -59,20 +59,22 @@ const ConfigurationUI = ({
 				}}
 				currentDesiredConfig={currentDesiredConfig}
 			/>
-			<Form
-				key={`${presetApplied}`}
-				{...{
-					newDesiredConfig,
-					reportedConfig,
-					updateNewDesiredConfig,
-					currentDesiredConfig,
-					onSave: (cfg) => {
-						update({
-							cfg,
-						}).catch(console.error)
-					},
-				}}
-			/>
+			<div className="form-container">
+				<Form
+					key={`${presetApplied}`}
+					{...{
+						newDesiredConfig,
+						reportedConfig,
+						updateNewDesiredConfig,
+						currentDesiredConfig,
+						onSave: (cfg) => {
+							update({
+								cfg,
+							}).catch(console.error)
+						},
+					}}
+				/>
+			</div>
 		</>
 	)
 }
