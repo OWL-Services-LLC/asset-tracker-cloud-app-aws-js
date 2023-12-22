@@ -52,22 +52,16 @@ export const AMAccelChart = ({
 
 		;['x', 'y', 'z'].forEach((axis, index) => {
 			const series = chart.series.push(
-				type === 'column'
-					? am5xy.ColumnSeries.new(root, {
-							xAxis: dateAxis,
-							yAxis: valueAxes,
-							valueYField: axis,
-							valueXField: 'date',
-							tooltip,
-						})
-					: am5xy.LineSeries.new(root, {
-							xAxis: dateAxis,
-							yAxis: valueAxes,
-							valueYField: axis,
-							valueXField: 'date',
-							tooltip,
-							stroke: am5.color(`#${getSeriesColor(index)}`),
-						}),
+				am5xy.LineSeries.new(root, {
+					xAxis: dateAxis,
+					yAxis: valueAxes,
+					valueYField: axis,
+					valueXField: 'date',
+					tooltip,
+					stroke: am5.color(`#${getSeriesColor(index)}`),
+					legendLabelText: axis,
+					legendRangeLabelText: axis,
+				}),
 			)
 
 			series.data.setAll(
@@ -80,6 +74,9 @@ export const AMAccelChart = ({
 			)
 
 			seriesArray.push(series)
+
+			let legend = chart.children.push(am5.Legend.new(root, {}))
+			legend.data.setAll(chart.series.values)
 		})
 
 		const cursorSettings: { snapToSeries?: am5xy.XYSeries[] } = {
