@@ -9,7 +9,7 @@ import styles from 'components/Asset/Configuration/Configuration.module.css'
 import { ConfigurationExplainer } from 'components/Asset/Configuration/ConfigurationExplainer.js'
 import { NumberConfigSetting } from 'components/Asset/Configuration/NumberConfigSetting.js'
 import { OutDatedWarning } from 'components/Asset/Configuration/OutDatedWarning.js'
-import { Collapsable } from 'components/Collapsable.js'
+import { CollapsablePreset } from 'components/CollapsablePreset'
 import {
 	IconWithText,
 	InfoIcon,
@@ -436,7 +436,7 @@ export const Form = ({
 				</div>
 			</fieldset>
 			<div className={styles.FullWidthGrayBox}>
-				<Collapsable
+				<CollapsablePreset
 					title={
 						<IconWithText>
 							<InfoIcon size={22} />
@@ -461,7 +461,7 @@ export const Form = ({
 							mvtRef.current?.focus()
 						}}
 					/>
-				</Collapsable>
+				</CollapsablePreset>
 			</div>
 			<footer className={styles.FullWidth}>
 				<button

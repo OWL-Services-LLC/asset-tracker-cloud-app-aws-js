@@ -91,6 +91,11 @@ dt {
   overflow-y: auto;
 }
 
+.preset-container{
+  max-height: 250px;
+  overflow-y: auto;
+}
+
 .map-container {
   border-radius: 50px;
 }

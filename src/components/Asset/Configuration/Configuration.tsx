@@ -59,7 +59,7 @@ const ConfigurationUI = ({
 				}}
 				currentDesiredConfig={currentDesiredConfig}
 			/>
-			<div className="form-container">
+			<div className="card form-container">
 				<Form
 					key={`${presetApplied}`}
 					{...{

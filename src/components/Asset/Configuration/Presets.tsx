@@ -1,7 +1,7 @@
 import { type ConfigData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { presetConfigs } from 'asset/config.js'
 import styles from 'components/Asset/Configuration/Presets.module.css'
-import { Collapsable } from 'components/Collapsable.js'
+import { CollapsablePreset } from 'components/CollapsablePreset'
 import { IconWithText, PresetsIcon } from 'components/FeatherIcon.js'
 
 export const Presets = ({
@@ -12,7 +12,7 @@ export const Presets = ({
 }) => {
 	return (
 		<div className={styles.wrapper}>
-			<Collapsable
+			<CollapsablePreset
 				title={
 					<IconWithText>
 						<PresetsIcon size={22} />
@@ -23,39 +23,41 @@ export const Presets = ({
 				data-intro="This provides sensible presets for different scenarios."
 			>
 				<>
-					<p data-test="about">
-						Below are configuration presets that provide sensible defaults for
-						typical application scenarios. Click 'Apply' to upload these
-						settings to the asset.
-					</p>
-					<div>
-						{Object.keys(presetConfigs).map((element) => (
-							<section
-								className={styles.preset}
-								key={element}
-								data-test={element}
-							>
-								<div>
-									<h5 className={styles.title}>
-										{presetConfigs[`${element}`].label}
-									</h5>
-									<p>{presetConfigs[`${element}`].description}</p>
-								</div>
-								<button
-									key={`${element}-preset-config`}
-									type="button"
-									className="btn btn-outline-primary ms-2"
-									onClick={() =>
-										setDesiredConfig(presetConfigs[`${element}`].config)
-									}
+					<div className="preset-container">
+						<p data-test="about">
+							Below are configuration presets that provide sensible defaults for
+							typical application scenarios. Click 'Apply' to upload these
+							settings to the asset.
+						</p>
+						<div>
+							{Object.keys(presetConfigs).map((element) => (
+								<section
+									className={styles.preset}
+									key={element}
+									data-test={element}
 								>
-									Apply
-								</button>
-							</section>
-						))}
+									<div>
+										<h5 className={styles.title}>
+											{presetConfigs[`${element}`].label}
+										</h5>
+										<p>{presetConfigs[`${element}`].description}</p>
+									</div>
+									<button
+										key={`${element}-preset-config`}
+										type="button"
+										className="btn btn-outline-primary ms-2"
+										onClick={() =>
+											setDesiredConfig(presetConfigs[`${element}`].config)
+										}
+									>
+										Apply
+									</button>
+								</section>
+							))}
+						</div>
 					</div>
 				</>
-			</Collapsable>
+			</CollapsablePreset>
 		</div>
 	)
 }
